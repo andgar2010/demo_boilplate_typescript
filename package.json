@@ -5,16 +5,18 @@
   "main": "dist/app.js",
   "scripts": {
     "prebuild": "rimraf dist/*",
-    "predebug": "rimraf dist/*",
     "build": "tsc",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint --fix ./src/*",
+    "lint-and-fix": "eslint . --ext .ts --fix",
     "prestart": "npm run build",
-    "lint": "eslint --fix ./src/*",
     "start": "node dist/app.js",
     "dev": "ts-node-dev --respawn --transpileOnly src/app.ts",
     "dev:debug": "ts-node-dev --inspect=4321 --respawn --transpileOnly src/index.ts",
     "dev:inspect_cmd": "nodemon --inspect-brk --inspect=0.0.0.0:9229 src/app.ts",
     "dev:inspect_nodemon": "nodemon --inspect src/index.ts",
     "dev:nodemon": "nodemon src/index.ts",
+    "predebug": "rimraf dist/*",
     "debug": "tsc-watch --onSuccess \"node -r module-alias/register dist/app.js\" --onFailure \"echo WHOOPS! Server compilation failed\""
   },
   "keywords": [],
@@ -30,12 +32,9 @@
     "@typescript-eslint/eslint-plugin": "^2.23.0",
     "@typescript-eslint/parser": "^2.23.0",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
-    "eslint-plugin-react": "^7.19.0",
+    "husky": "^4.2.3",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
     "rimraf": "^3.0.2",
@@ -44,10 +43,26 @@
     "tsc-watch": "^4.2.3",
     "typescript": "^3.8.3"
   },
+  "engines": {
+    "node": ">= 8.0.0",
+    "npm": ">= 6.0.0"
+  },
   "_moduleAliases": {
     "@dist": "dist/",
-    "@routes/*": ["/dist/routes/*"],
-    "@controllers/*": ["/dist/controllers/*"],
-    "@models/*": ["/dist/models/*"]
+    "@routes/*": [
+      "/dist/routes/*"
+    ],
+    "@controllers/*": [
+      "/dist/controllers/*"
+    ],
+    "@models/*": [
+      "/dist/models/*"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm lint",
+      "pre-push": "npm lint"
+    }
   }
 }
