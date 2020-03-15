@@ -78,6 +78,9 @@
     "http://*": ["../../../.deno/deps/http/*"],
     "https://*": ["../../../.deno/deps/https/*"],
     "*.ts": ["*"],
-    "./src/*": ["/*"]
+    "@routes/*": ["routes/*"],
+    "@controllers/*": ["controllers/*"],
+    "@models/*": ["models/*"]
+    // "./src/*": ["/*"]
   }
 }
