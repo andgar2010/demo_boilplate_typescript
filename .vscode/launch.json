@@ -6,8 +6,35 @@
   "configurations": [
     {
       "type": "node",
+      "request": "attach",
+      "name": "Attach to dev:debug",
+      "protocol": "inspector",
+      "port": 4321,
+      "restart": true,
+      "cwd": "${workspaceRoot}"
+    },
+    {
+      "name": "Current TS File",
+      "type": "node",
       "request": "launch",
-      "name": "Build Project",
+      "args": ["${file}"],
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "sourceMaps": true,
+      "cwd": "${workspaceRoot}",
+      "protocol": "inspector"
+    },
+    {​
+      "name": "Debug index.ts",​
+      "type": "node",​
+      "request": "launch",​
+      "cwd": "${workspaceRoot}",​
+      "runtimeArgs": ["-r", "ts-node/register"],​
+      "args": ["${workspaceRoot}/src/app.ts"]​
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Build Project with debug",
       "program": "${workspaceFolder}/src/app.ts",
       "preLaunchTask": "npm: build",
       "sourceMaps": true,
