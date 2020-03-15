@@ -15,7 +15,7 @@
     "dev:inspect_cmd": "nodemon --inspect-brk --inspect=0.0.0.0:9229 src/app.ts",
     "dev:inspect_nodemon": "nodemon --inspect src/index.ts",
     "dev:nodemon": "nodemon src/index.ts",
-    "debug": "tsc-watch --onSuccess \"node -r module-alias/register dist/app.js\" --onFailure \"echo WHOOPS! Server compilation failed\"",
+    "debug": "tsc-watch --onSuccess \"node -r module-alias/register dist/app.js\" --onFailure \"echo WHOOPS! Server compilation failed\""
   },
   "keywords": [],
   "author": "Andres Garcia",
