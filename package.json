@@ -45,6 +45,9 @@
     "typescript": "^3.8.3"
   },
   "_moduleAliases": {
-    "@shared": "dist/"
+    "@dist": "dist/",
+    "@routes/*": ["/dist/routes/*"],
+    "@controllers/*": ["/dist/controllers/*"],
+    "@models/*": ["/dist/models/*"]
   }
 }
