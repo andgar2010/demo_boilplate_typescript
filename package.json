@@ -2,7 +2,8 @@
   "name": "boilplate_typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/app.js",
+  "private": true,
+  "main": "dist/index.js",
   "scripts": {
     "prebuild": "rimraf dist/*",
     "build": "tsc",
@@ -10,19 +11,25 @@
     "lint:fix": "eslint --fix ./src/*",
     "lint-and-fix": "eslint . --ext .ts --fix",
     "prestart": "npm run build",
-    "start": "node dist/app.js",
-    "dev": "ts-node-dev --respawn --transpileOnly src/app.ts",
+    "start": "node dist/index.js",
+    "dev": "ts-node-dev --respawn --transpileOnly src/index.ts",
     "dev:debug": "ts-node-dev --inspect=4321 --respawn --transpileOnly src/index.ts",
-    "dev:inspect_cmd": "nodemon --inspect-brk --inspect=0.0.0.0:9229 src/app.ts",
+    "dev:inspect_cmd": "nodemon --inspect-brk --inspect=0.0.0.0:9229 src/index.ts",
     "dev:inspect_nodemon": "nodemon --inspect src/index.ts",
     "dev:nodemon": "nodemon src/index.ts",
     "predebug": "rimraf dist/*",
-    "debug": "tsc-watch --onSuccess \"node -r module-alias/register dist/app.js\" --onFailure \"echo WHOOPS! Server compilation failed\""
+    "debug": "tsc-watch --onSuccess \"node -r module-alias/register dist/index.js\" --onFailure \"echo WHOOPS! Server compilation failed\"",
+    "debug1": "ts-node -r tsconfig-paths/register src/index.ts"
   },
   "keywords": [],
-  "author": "Andres Garcia",
+  "author": {
+    "name": "Andrés García - DEV",
+    "email": "dev@tech-andgar.me",
+    "url": "https://tech-andgar.me"
+  },
   "license": "ISC",
   "dependencies": {
+    "@sentry/node": "^5.14.2",
     "express": "^4.17.1",
     "module-alias": "^2.2.2"
   },
@@ -41,23 +48,19 @@
     "ts-node": "^8.6.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "tsc-watch": "^4.2.3",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3"
   },
   "engines": {
     "node": ">= 8.0.0",
-    "npm": ">= 6.0.0"
+    "npm": ">= 6.0.0",
+    "yarn": ">= 1.22.1"
   },
   "_moduleAliases": {
     "@dist": "dist/",
-    "@routes/*": [
-      "/dist/routes/*"
-    ],
-    "@controllers/*": [
-      "/dist/controllers/*"
-    ],
-    "@models/*": [
-      "/dist/models/*"
-    ]
+    "@routes/*": "/dist/routes/*",
+    "@controllers/*": "/dist/controllers/*",
+    "@models/*": "/dist/models/*"
   },
   "husky": {
     "hooks": {
